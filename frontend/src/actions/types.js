@@ -1,23 +1,14 @@
-// Sets
-export const GET_SETS = 'GET_SETS';
-export const GET_SETS_BY_ID = 'GET_SETS_BY_ID';
-export const GET_ALLSETS = 'GET_ALLSETS';
-export const GET_MYSETS = 'GET_MYSETS';
-export const DELETE_SET = 'DELETE_SET';
-export const ADD_SET = 'ADD_SET';
-export const UPDATE_SET = 'UPDATE_SET';
-export const REPLACE_SET = 'REPLACE_SET';
-export const SHOW_SET = 'SHOW_SET';
+// Episodes
+export const GET_EPISODES = 'GET_EPISODES';
+export const GET_EPISODES_BY_ID = 'GET_EPISODES_BY_ID';
+export const GET_ALLEPISODES = 'GET_ALLEPISODES';
+export const GET_MYEPISODES = 'GET_MYEPISODES';
+export const DELETE_EPISODE = 'DELETE_EPISODE';
+export const ADD_EPISODE = 'ADD_EPISODE';
+export const UPDATE_EPISODE = 'UPDATE_EPISODE';
+export const REPLACE_EPISODE = 'REPLACE_EPISODE';
+export const SHOW_EPISODE = 'SHOW_EPISODE';
 
-//Clusters
-export const GET_CLUSTERS = 'GET_CLUSTERS';
-export const GET_ALLCLUSTERS = 'GET_ALLCLUSTERS';
-export const GET_MYCLUSTERS = 'GET_MYCLUSTERS';
-export const DELETE_CLUSTER = 'DELETE_CLUSTER';
-export const ADD_CLUSTER = 'ADD_CLUSTER';
-export const UPDATE_CLUSTER = 'UPDATE_CLUSTER';
-export const REPLACE_CLUSTER = 'REPLACE_CLUSTER';
-export const SHOW_CLUSTER = 'SHOW_CLUSTER';
 
 export const GET_LEADS = 'GET_LEADS';
 export const DELETE_LEAD = 'DELETE_LEAD';

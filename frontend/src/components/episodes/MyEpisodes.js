@@ -2,11 +2,11 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
-import { getMySets, deleteSet, getSets } from "../../actions/sets.js";
-import FormSet from "./FormSet.js";
-import DetailsSet from "./DetailsSet.js";
+import { getMyEpisodes, deleteEpisode, getEpisodes } from "../../actions/episodes.js";
+import FormEpisode from "./FormEpisode.js";
+import DetailsEpisode from "./DetailsEpisode.js";
 
-export class MySets extends Component {
+export class MyEpisodes extends Component {
   constructor(props) {
     super(props);
 
@@ -14,13 +14,12 @@ export class MySets extends Component {
       isUpdating: true,
       isCreating: false,
       isViewing: false,
-      block: this.props.block,
-      subject: this.props.subject,
-      selectedSetId: null,
-      selectedSet: null,
+      condition: this.props.condition,
+      selectedEpisodeId: null,
+      selectedEpisode: null,
       username: null,
     };
-    this.backToMySets = this.backToMySets.bind(this);
+    this.backToMyEpisodes = this.backToMyEpisodes.bind(this);
   }
   rendering(user) {
       
@@ -32,23 +31,23 @@ export class MySets extends Component {
       });
     }
         this.setState({username: user.username})
-      this.props.getMySets(user.username);
+      this.props.getMyEpisodes(user.username);
     }
   }
 
   static propTypes = {
-    //This is the first "set" from the func down below
-    sets: PropTypes.array.isRequired,
-    getMySets: PropTypes.func.isRequired,
-    getSets: PropTypes.func.isRequired,
-    deleteSet: PropTypes.func.isRequired,
+    //This is the first "episode" from the func down below
+    episodes: PropTypes.array.isRequired,
+    getMyEpisodes: PropTypes.func.isRequired,
+    getEpisodes: PropTypes.func.isRequired,
+    deleteEpisode: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
 
   }
-  backToMySets(event) {
+  backToMyEpisodes(event) {
     this.setState({ isCreating: false, isViewing: false, isUpdating: true});
   }
   render() {
@@ -56,12 +55,11 @@ export class MySets extends Component {
     if (this.state.isViewing) {
       return (
         <Fragment>
-          <DetailsSet
-            selectedSetId={this.state.selectedSetId}
-            set={this.state.selectedSet}
-            block={'Cardiovascular'}
-            subject={"Microbiology"}
-            backToList={this.backToMySets}
+          <DetailsEpisode
+            selectedEpisodeId={this.state.selectedEpisodeId}
+            episode={this.state.selectedEpisode}
+            condition={'Cardiovascular'}
+            backToList={this.backToMyEpisodes}
           />
         </Fragment>
       );
@@ -73,7 +71,7 @@ export class MySets extends Component {
     return (
       <div className="container">
         <h1 className="text-center py-2 text-info">
-          {this.state.username +"'s"} Sets
+          {this.state.username +"'s"} Episodes
         </h1>
         <p></p>
         <table className="table table-striped">
@@ -85,25 +83,25 @@ export class MySets extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.sets.map((set) => (
-              <tr key={set.id}>
-                <td>{set.id}</td>
-                <td>{set.title}</td>
+            {this.props.episodes.map((episode) => (
+              <tr key={episode.id}>
+                <td>{episode.id}</td>
+                <td>{episode.title}</td>
 
                 <td>
                   <a
-                    href= {`#/mysets/${set.id}`}
+                    href= {`#/myepisodes/${episode.id}`}
                     className="btn btn-warning"
                     style={{ whiteSpace: "nowrap" }}
                     onClick={(e) => {
                       this.setState({
-                        selectedSetId: set.id,
+                        selectedEpisodeId: episode.id,
                         // isViewing: true,
-                        selectedSet: set,
+                        selectedEpisode: episode,
                       });
                     }}
                   >
-                    View Set
+                    View Episode
                   </a>
                 </td>
               </tr>
@@ -117,8 +115,8 @@ export class MySets extends Component {
 
 const mapStateToProps = (state) => ({
   // the first one is whatever we're getting so it's okay, the 2nd one is the name of the reducer, the 3rd the state in the reducer
-  sets: state.sets.sets,
+  episodes: state.episodes.episodes,
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getMySets, deleteSet, getSets })(MySets);
+export default connect(mapStateToProps, { getMyEpisodes, deleteEpisode, getEpisodes })(MyEpisodes);

@@ -27,13 +27,13 @@ export class Register extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     const { username, email, password, password2, role } = this.state;
-    if (this.state.role !== "Instructor" && this.state.role !== "Student" ) {
+    if (this.state.role !== "Physician" && this.state.role !== "Patient" ) {
       this.props.createMessage({ roleNotSelected: "Please select a role" });
     } 
     if (password !== password2) {
       this.props.createMessage({ passwordNotMatch: "Passwords do not match" });
     } 
-    else if (this.state.role == "Instructor" || this.state.role == "Student" ) {
+    else if (this.state.role == "Physician" || this.state.role == "Patient" ) {
       const newUser = new FormData();
       newUser.append("username", this.state.username);
       newUser.append("password", this.state.password);
@@ -149,9 +149,9 @@ export class Register extends Component {
                     <option disabled selected>
                       Choose your role...
                     </option>
-                    <option>Student</option>
+                    <option>Patient</option>
 
-                    <option>Instructor</option>
+                    <option>Physician</option>
                   </Form.Control>
                 </div>
 

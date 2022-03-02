@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import ListSets from "../sets/ListSets";
-import ListClusters from "../clusters/ListClusters";
 import { Button } from "react-bootstrap";
 export class List extends Component {
   constructor(props) {
@@ -56,17 +55,9 @@ export class List extends Component {
   </Button>
         </div>
   <div className="row align-items-start mt-2 pt-2 px-5 mb-5">
-      {/* <div className="col-1"></div> */}
+     
     <div className="col-sm-6 col-md-6 col-lg-6 text-center pb-2" >
-      {/* <img
-      //    by artist kiranshastry
-        src={
-          "https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Sets.png"
-        }
-        className=" img-fluid blocksBorder"
-        alt="Responsive image"
-        style={{ height: "300px", width: "290" }}
-      />{" "} */}
+
       <a
                   onClick={(e) => {
                     this.goSet();
@@ -76,20 +67,12 @@ export class List extends Component {
         className="btn btn-rounded1 mt-2 stretched-link text-center  d-block mx-auto"
         style={{ maxWidth: "390px", fontSize: "3rem", padding: "5rem 2rem" }}
       >
-         <i class="fas fa-layer-group"></i> Sets
+         <i className="fas fa-layer-group mb-2"></i> Sets
       </a>
     </div>
 
     <div className=" col-sm-6 col-md-6 col-lg-6 text-center pb-2">
-      {/* <img
-    //    by artist kiranshastry
-        src={
-          "https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Clusters.png"
-        }
-        className=" img-fluid blocksBorder"
-        alt="Responsive image"
-        style={{ height: "300px", width: "290" }}
-      /> */}
+
       <div
                   onClick={(e) => {
                     this.goCluster();
@@ -99,7 +82,7 @@ export class List extends Component {
         className="btn btn-rounded1 mt-2 stretched-link text-center  d-block mx-auto"
         style={{ maxWidth: "390px", fontSize: "3rem", padding: "5rem 2rem" }}
       >
-      <i class="fas fa-sitemap"></i>  Clusters
+      <i className="fas fa-sitemap mb-2"></i>  Clusters
       </div>
     </div>
     {/* <div className="col-1"></div> */}

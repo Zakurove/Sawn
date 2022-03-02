@@ -56,7 +56,9 @@ export class Header extends Component {
     return (
       <Fragment>
       <Navbar  bg="light" expand="lg" className="mb-5">
-      <Navbar.Brand href="/#" style={{fontSize: "2.5rem"}} className="text-info">Tawassam</Navbar.Brand>
+      <Navbar.Brand href="/#" style={{fontSize: "2.5rem"}} className="d-inline-block align-top"><img src={
+                  "https://tawassam.ams3.digitaloceanspaces.com/Test1/media/SawnPic.png"
+                } style={{width: "130px"}} /></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="mr-auto ml-2" style={{fontSize: "1.8rem"}}>

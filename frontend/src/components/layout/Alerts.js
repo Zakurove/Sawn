@@ -19,7 +19,7 @@ export class Alerts extends Component {
       if(error.msg.username) alert.error(error.msg.username.join());
       if(error.msg.detail) if(error.msg.detail == 'You do not have permission to perform this action.') alert.error(error.msg.detail);
       if(error.msg.title) if(error.msg.title == 'This field may not be blank.') alert.error(`Title: ${error.msg.title.join()}`);
-      if(error.msg.sets) if(error.msg.title == 'This list may not be empty.') alert.error(`You must choose sets`);
+      if(error.msg.episodes) if(error.msg.title == 'This list may not be empty.') alert.error(`You must choose episodes`);
     }
     if(message !== prevProps.message){
       if(message.deleteLead) alert.success(message.deleteLead);

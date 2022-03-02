@@ -43,7 +43,9 @@ export class MainPage extends Component {
 
         {/* For text content */}
       <div className="col-lg-4  jumbotron bg-light " style={{marginTop: "100px"}}>
-          <h1 className="display-4 text-info mb-4 pl-2" >Welcome to <span style={{fontWeight: "bold", color: "#06D6D6"}}>Tawassam</span></h1>
+          <h1 className="display-4 text-info mb-4 pl-2" >Welcome to <img style={{width: '250px'}} src={
+                  "https://tawassam.ams3.digitaloceanspaces.com/Test1/media/SawnPic.png"
+                }/></h1>
           {/* <p className="text-info" style={{fontSize: "1.5rem"}}>
             This is your distentation for learning and teaching visual materials
             in health care!
@@ -54,23 +56,26 @@ export class MainPage extends Component {
           <li className="mt-4">
           <span class="fa-li"><i class="fas fa-laptop text-secondary" style={{fontSize: "1.7rem", marginTop: "0.8rem"}}></i></span>
           <p className="text-info ml-2" style={{fontSize: "1.3rem", fontWeight: "bold"}}>
-          <span style={{color: "#06D6D6"}}>Tawassam</span> is a platform that aims to facilitate learning visual materials for healthcare students.
+          <span style={{color: "#06D6D6"}}>Sawn</span> aims to facilitate monitoring outpatients with chronic conditions for a better future.
           </p>
           </li> 
 
-          <li className="mt-4">
-          <span class="fa-li"><i class="fas fa-chalkboard-teacher text-secondary" style={{fontSize: "1.7rem", marginTop: "1.1rem"}}></i></span>
-          <p className="text-info ml-2" style={{fontSize: "1.3rem", fontWeight: "bold"}}>
-          <span style={{color: "#06D6D6"}}>Instructors</span> can create sets by uploading images, explanations, as well as adding notes.        
-          </p>
-          </li>
 
           <li className="mt-4"> 
           <span class="fa-li"><i class="fas fa-users text-secondary" style={{fontSize: "1.7rem" , marginTop: "0.6rem"}}></i> </span>
             <p className="text-info ml-2" style={{fontSize: "1.3rem", fontWeight: "bold"}}>
-            <span style={{color: "#06D6D6"}}>Students</span> can study all available sets, including our own library.
+            <span style={{color: "#06D6D6"}}>Patients</span> can document their conditions continuously and log any abonormalities.
             </p>
             </li>
+
+          <li className="mt-4">
+          <span class="fa-li"><i class="fas fa-chalkboard-teacher text-secondary" style={{fontSize: "1.7rem", marginTop: "1.1rem"}}></i></span>
+          <p className="text-info ml-2" style={{fontSize: "1.3rem", fontWeight: "bold"}}>
+          <span style={{color: "#06D6D6"}}>Physicians</span> can monitors their registered patients and view their their logs when history is required.        
+          </p>
+          </li>
+
+
 
             </ul>
 
@@ -92,6 +97,27 @@ export class MainPage extends Component {
         <div className="container-fluid mt-5" >
           <div className="row align-items-start">
 
+
+
+
+
+
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5" >
+              <img
+                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Neuro.jpg"}
+                className="img-fluid blocksBorder"
+                alt="Responsive image"
+                style={{ height: "390px", width: "300px" }}
+              />
+              <a
+              style={{  maxWidth: "300px" }}
+                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
+                href="/#/seizures"
+              >
+                Seizures
+              </a>
+            </div>
+
             {/* Cardio */}
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3  text-center mb-5" >
               {/* <div className="mx-auto" style={{width:"300px"}}> */}
@@ -109,49 +135,18 @@ export class MainPage extends Component {
                 style={{  maxWidth: "300px" }}
                 href="/#/cardiovascular"
               >
-                Cardiovascular
+                Cardiovascular Diseases
               </a>
             </div>
              {/* </div> */}
 
 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5" >
-              <img
-                src={
-                  "https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/MSK2.jpg"
-                }
-                className="img-fluid blocksBorder"
-                alt="Responsive image"
-                style={{ height: "390px", width: "300px" }}
-              />{" "}
-              <a
-              style={{  maxWidth: "300px" }}
-                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/musculoskeletal"
-              >
-                Musculoskeletal
-              </a>
-            </div>
 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5" >
-              <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Resp.jpg"}
-                className="img-fluid blocksBorder"
-                alt="Responsive image"
-                style={{ height: "390px", width: "300px" }}
-              />{" "}
-              <a
-              style={{  maxWidth: "300px" }}
-                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/respiratory"
-              >
-                Respiratory
-              </a>
-            </div>
 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5" >
+
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
               <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Hema.jpg"}
+                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/pancreas2.jpg"}
                 className="img-fluid blocksBorder"
                 alt="Responsive image"
                 style={{ height: "390px", width: "300px" }}
@@ -159,31 +154,15 @@ export class MainPage extends Component {
               <a
               style={{  maxWidth: "300px" }}
                 className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/hemOnc"
+                href="/#/diabetes"
               >
-                Hematology/Oncology
-              </a>
-            </div>
-
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5" >
-              <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Neuro.jpg"}
-                className="img-fluid blocksBorder"
-                alt="Responsive image"
-                style={{ height: "390px", width: "300px" }}
-              />
-              <a
-              style={{  maxWidth: "300px" }}
-                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/neurology"
-              >
-                Neurology
+                Diabetes
               </a>
             </div>
 
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
               <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Endo2.jpg"}
+                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Brain.jpg"}
                 className="img-fluid blocksBorder"
                 alt="Responsive image"
                 style={{ height: "390px", width: "300px" }}
@@ -191,44 +170,15 @@ export class MainPage extends Component {
               <a
               style={{  maxWidth: "300px" }}
                 className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/endocrine"
+                href="/#/headache"
               >
-                Endocrine
+                Headache
               </a>
             </div>
 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5">
-              <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Gastro.jpg"}
-                className="img-fluid blocksBorder"
-                alt="Responsive image"
-                style={{ height: "390px", width: "300px" }}
-              />
-              <a
-              style={{  maxWidth: "300px" }}
-                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto"
-                href="/#/gastrointestinal"
-              >
-                Gastrointestinal
-              </a>
-            </div>
 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 text-center mb-5 ">
-              <img
-                src={"https://tawassam.ams3.digitaloceanspaces.com/Test1/media/Blocks/Genito.jpg"}
-                className="img-fluid mr-4 ml-4 blocksBorder"
-                alt="Responsive image"
-                style={{ height: "390px", width: "300px" }}
-                
-              />
-              <a
-              style={{  maxWidth: "300px" }}
-                className=" btn btn-rounded1 mt-2 stretched-link text-center d-block mx-auto "
-                href="/#/genitourinary"
-              >
-                Genitourinary
-              </a>
-            </div>
+
+
           </div>
         </div>
         </div>

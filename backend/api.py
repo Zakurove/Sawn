@@ -1,8 +1,8 @@
-from .models import Set, Cluster
+from .models import Episode
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, renderers
 from rest_framework.parsers import MultiPartParser, FormParser
-from .serializers import SetSerializer, ClusterSerializer
+from .serializers import EpisodeSerializer
 from rest_framework.permissions import IsAdminUser, SAFE_METHODS
 
 
@@ -16,9 +16,9 @@ class IsAdminUserOrReadOnly(IsAdminUser):
         return request.method in SAFE_METHODS or is_insctructors
 
 # If the user is in the instructors group, they will be able to do add sets
-class IsInstructor(permissions.BasePermission):
+class IsPhysician(permissions.BasePermission):
     def has_permission(self, request, view):
-        if request.user and request.user.groups.filter(name='instructors'):
+        if request.user and request.user.groups.filter(name='physician'):
             return True
         return request.method in SAFE_METHODS
 
@@ -31,22 +31,9 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
 
 
-# Cluster
-class ClusterViewSet(viewsets.ModelViewSet):
-    queryset = Cluster.objects.all()
-    # permission_classes = [
-    #     IsInstructor,
-    #     IsOwnerOrReadOnly
-    # ]
-    parser_classes = (MultiPartParser, )
-    serializer_class = ClusterSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
-
-# Set
-class SetViewSet(viewsets.ModelViewSet):
-    queryset = Set.objects.all()
+# Episode
+class EpisodeViewSet(viewsets.ModelViewSet):
+    queryset = Episode.objects.all()
     # permission_classes = [
     #     # permissions.IsAuthenticated,
     #     # IsAdminUserOrReadOnly
@@ -54,7 +41,7 @@ class SetViewSet(viewsets.ModelViewSet):
     #     IsOwnerOrReadOnly
     # ]
     parser_classes = (MultiPartParser, )
-    serializer_class = SetSerializer
+    serializer_class = EpisodeSerializer
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 

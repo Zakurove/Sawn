@@ -1,34 +1,32 @@
 import axios from 'axios';
 import { createMessage, returnErrors } from './messages';
 import { tokenConfig } from './auth'
-import { GET_SETS, DELETE_SET, ADD_SET, SHOW_SET, UPDATE_SET, REPLACE_SET, GET_MYSETS, GET_ALLSETS, GET_SETS_BY_ID} from './types';
+import { GET_EPISODES, DELETE_EPISODE, ADD_EPISODE, SHOW_EPISODE, UPDATE_EPISODE, REPLACE_EPISODE, GET_MYEPISODES, GET_ALLEPISODES, GET_EPISODES_BY_ID} from './types';
 
 //Choose Block
 
-//GET Sets
-export const getSets = (block, subject) => (dispatch, getState) => {
-  axios.get('/api/sets/', tokenConfig(getState))
+//GET Episodes
+export const getEpisodes = (condition) => (dispatch, getState) => {
+  axios.get('/api/episodes/', tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_SETS,
+        type: GET_EPISODES,
         payload: res.data,
-        subject: subject,
-        block: block
+        condition: condition
         
       
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//GET Sets By ID
-export const getSetById = ( subject, block, id) => (dispatch, getState) => {
-  axios.get('/api/sets/', tokenConfig(getState))
+//GET Episodes By ID
+export const getEpisodeById = (  condition, id) => (dispatch, getState) => {
+  axios.get('/api/episodes/', tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_SETS_BY_ID,
+        type: GET_EPISODES_BY_ID,
         payload: res.data,
-        subject: subject,
-        block: block,
+        condition: condition,
         id: id
         
       
@@ -36,83 +34,83 @@ export const getSetById = ( subject, block, id) => (dispatch, getState) => {
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//GET My Sets
-export const getMySets = (user) => (dispatch, getState) => {
-  axios.get('/api/sets/', tokenConfig(getState))
+//GET My Episodes
+export const getMyEpisodes = (user) => (dispatch, getState) => {
+  axios.get('/api/episodes/', tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_MYSETS,
+        type: GET_MYEPISODES,
         payload: res.data,
         user: user
       
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
-//GET ALL SETS
-export const getAllSets = () => (dispatch, getState) => {
-  axios.get('/api/sets/', tokenConfig(getState))
+//GET ALL EPISODES
+export const getAllEpisodes = () => (dispatch, getState) => {
+  axios.get('/api/episodes/', tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: GET_ALLSETS,
+        type: GET_ALLEPISODES,
         payload: res.data,
       
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
-//ADD Sets
-export const addSet = set => (dispatch, getState) => {
+//ADD Episodes
+export const addEpisode = episode => (dispatch, getState) => {
   axios
-    .post('/api/sets/', set, tokenConfig(getState), {
+    .post('/api/episodes/', episode, tokenConfig(getState), {
       headers: {
         'content-type': 'multipart/form-data'
       }
     })
     .then(res => {
-      dispatch(createMessage({success: "Set Added Successfully"}))
+      dispatch(createMessage({success: "Episode Added Successfully"}))
       dispatch({
-        type: ADD_SET,
+        type: ADD_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//Update Sets
-export const updateSet = (set, id) => (dispatch, getState) => {
+//Update Episodes
+export const updateEpisode = (episode, id) => (dispatch, getState) => {
   axios
-    .put(`/api/sets/${id}/`, set, tokenConfig(getState), {
+    .put(`/api/episodes/${id}/`, episode, tokenConfig(getState), {
       headers: {
         'content-type': 'multipart/form-data'
       }
     })
     .then(res => {
-      dispatch(createMessage({info: "Set Edited"}))
+      dispatch(createMessage({info: "Episode Edited"}))
       dispatch({
-        type: UPDATE_SET,
+        type: UPDATE_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//Show details of a single SHOW_SET
-export const showSet = id => (dispatch, getState) => {
-  axios.get('/api/sets/', tokenConfig(getState))
+//Show details of a single SHOW_EPISODE
+export const showEpisode = id => (dispatch, getState) => {
+  axios.get('/api/episodes/', tokenConfig(getState))
     .then(res => {
       dispatch({
-        type: SHOW_SET,
+        type: SHOW_EPISODE,
         payload: id
 
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//Delete Sets
-export const deleteSet = (id) => (dispatch, getState) => {
+//Delete Episodes
+export const deleteEpisode = (id) => (dispatch, getState) => {
   axios
-   .delete(`/api/sets/${id}/`, tokenConfig(getState))
+   .delete(`/api/episodes/${id}/`, tokenConfig(getState))
     .then(res => {
-      dispatch(createMessage({danger: "Set Deleted"}))
+      dispatch(createMessage({danger: "Episode Deleted"}))
       dispatch({
-        type: DELETE_SET,
+        type: DELETE_EPISODE,
         payload: id
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
@@ -120,51 +118,51 @@ export const deleteSet = (id) => (dispatch, getState) => {
 
 
 //Add Note
-export const addNote = (set, id) => (dispatch, getState) => {
+export const addNote = (episode, id) => (dispatch, getState) => {
   axios
-    .put(`/api/sets/${id}/`, set, tokenConfig(getState))
+    .put(`/api/episodes/${id}/`, episode, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({success: "Note Added"}))
       dispatch({
-        type: UPDATE_SET,
+        type: UPDATE_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 //Remove Images
-export const removeImage = (set, id) => (dispatch, getState) => {
+export const removeImage = (episode, id) => (dispatch, getState) => {
   axios
-    .put(`/api/sets/${id}/`, set, tokenConfig(getState))
+    .put(`/api/episodes/${id}/`, episode, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({danger: "Image Removed"}))
       dispatch({
-        type: UPDATE_SET,
+        type: UPDATE_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
 //Edit Note
-export const editNote = (set, id) => (dispatch, getState) => {
+export const editNote = (episode, id) => (dispatch, getState) => {
   axios
-    .put(`/api/sets/${id}/`, set, tokenConfig(getState))
+    .put(`/api/episodes/${id}/`, episode, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({info: "Note Edited"}))
       dispatch({
-        type: UPDATE_SET,
+        type: UPDATE_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
 //Delete Note
-export const deleteNote = (set, id) => (dispatch, getState) => {
+export const deleteNote = (episode, id) => (dispatch, getState) => {
   axios
-    .put(`/api/sets/${id}/`, set, tokenConfig(getState))
+    .put(`/api/episodes/${id}/`, episode, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({danger: "Note Deleted"}))
       dispatch({
-        type: UPDATE_SET,
+        type: UPDATE_EPISODE,
         payload: res.data
       });
     }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));

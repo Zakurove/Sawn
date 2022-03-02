@@ -11,46 +11,21 @@ from django.contrib.auth.models import User
 
 
 
-# Set
-class Set(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    block = models.CharField(blank=True, null=True, max_length=20)
-    subject = models.CharField(blank=True, null=True, max_length=20)
-    owner_username = models.CharField(max_length=30, null=True)
+# Episode
+class Episode(models.Model):
+    awareness = models.CharField(max_length=20)
+    duration = models.CharField(blank=True, null=True, max_length=200)
+    disease = models.CharField(blank=True, null=True, max_length=100)
+    type = models.CharField(blank=True, null=True, max_length=200)
+    medications = models.CharField(blank=True, null=True, max_length=200)
+    notes = models.TextField(blank=True, null=True, max_length=2000)
+    datee = models.CharField(blank=True, null=True, max_length=200)
+    condition = models.CharField(blank=True, null=True, max_length=200)
+    owner_username = models.CharField(max_length=300, null=True)
     owner = models.ForeignKey(
-        User, related_name="set", on_delete=models.CASCADE, null=True)
+        User, related_name="episode", on_delete=models.CASCADE, null=True)
     
     def save(self, *args, **kwargs):
-        super(Set, self).save(*args, **kwargs)
+        super(Episode, self).save(*args, **kwargs)
 
 
-class SetImage(models.Model):
-    set = models.ForeignKey(Set, on_delete=models.CASCADE,
-                            null=True, related_name='setImages')
-    image = models.ImageField(upload_to='Sets', blank=True, null=True)
-
-
-class SetNotes(models.Model):
-    setImage = models.ForeignKey(
-        SetImage, on_delete=models.CASCADE, null=True, related_name='setNotes')
-    noteContent = models.TextField(blank=True, null=True)
-    x = models.IntegerField(blank=True, null=True)
-    y = models.IntegerField(blank=True, null=True)
-
-
-
-#Cluster
-class Cluster(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True, null=True)
-    block = models.CharField(blank=True, null=True, max_length=20)
-    subject = models.CharField(blank=True, null=True, max_length=20)
-    owner_username = models.CharField(max_length=30, null=True)
-    owner = models.ForeignKey(
-        User, related_name="cluster", on_delete=models.CASCADE, null=True)
-    #Many to many relationship between sets and clusters
-    sets = models.ManyToManyField(Set, related_name='clusters', blank=True)
-
-    def save(self, *args, **kwargs):
-        super(Cluster, self).save(*args, **kwargs)

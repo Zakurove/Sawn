@@ -3,12 +3,12 @@ import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { getSets, deleteSet } from "../../actions/sets.js";
+import { getEpisodes, deleteEpisode } from "../../actions/episodes.js";
 // import { loadingOn, loadingOff } from "../../actions/loading.js";
-import FormSet from "./FormSet.js";
-import DetailsSet from "./DetailsSet.js";
+import FormEpisode from "./FormEpisode.js";
+import DetailsEpisode from "./DetailsEpisode.js";
 
-export class ListSets extends Component {
+export class ListEpisodes extends Component {
   static propTypes = {
     goCluster: PropTypes.func.isRequired,
   };
@@ -20,32 +20,29 @@ export class ListSets extends Component {
       isCreating: false,
       isReady: false,
       isViewing: false,
-      block: this.props.block,
-      subject: this.props.subject,
-      selectedSetId: null,
-      selectedSet: null,
-      blockLink: null,
-      subjectLink: null,
+      condition: this.props.condition,
+      selectedEpisodeId: null,
+      selectedEpisode: null,
+      conditionLink: null,
+
     };
     this.backToList = this.backToList.bind(this);
   }
-  //Before render, to fetch info about this list regarding subject and block
+  //Before render, to fetch info about this list regarding  and condition
   rendering() {
     if (this.state.isUpdating == true) {
-      if (this.props.block == "Hematology/Oncology") {
+      if (this.props.condition == "Hematology/Oncology") {
         this.setState({
-          blockLink: "hemOnc",
+          conditionLink: "hemOnc",
         });
       }
-      if (this.props.block !== "Hematology/Oncology") {
-        const blockLink = this.props.block.toLowerCase();
+      if (this.props.condition !== "Hematology/Oncology") {
+        const conditionLink = this.props.condition.toLowerCase();
         this.setState({
-          blockLink: blockLink,
+          conditionLink: conditionLink,
         });
       }
-      const subjectLink = this.props.subject.toLowerCase();
       this.setState({
-        subjectLink: subjectLink,
         isUpdating: false,
       });
 
@@ -66,28 +63,28 @@ export class ListSets extends Component {
       // setTimeout(() => {
 
       // })
-      this.props.getSets(this.state.block, this.state.subject);
+      this.props.getEpisodes(this.state.condition);
     }
 
     this.backToList = this.backToList.bind(this);
   }
 
   static propTypes = {
-    //This is the first "set" from the func down below
-    sets: PropTypes.array.isRequired,
-    getSets: PropTypes.func.isRequired,
-    deleteSet: PropTypes.func.isRequired,
+    //This is the first "episode" from the func down below
+    episodes: PropTypes.array.isRequired,
+    getEpisodes: PropTypes.func.isRequired,
+    deleteEpisode: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    block: PropTypes.string.isRequired,
-    subject: PropTypes.string.isRequired,
+    condition: PropTypes.string.isRequired,
+
   };
 
   componentDidMount() {
-    this.props.getSets(this.props.block, this.props.subject);
+    this.props.getEpisodes(this.props.condition);
   }
   backToList(event) {
     this.setState({ isCreating: false, isViewing: false, isUpdating: true, isReady: false });
-    this.props.getSets(this.props.block, this.props.subject);
+    this.props.getEpisodes(this.props.condition);
   }
   render() {
         // // The loading handler
@@ -98,9 +95,8 @@ export class ListSets extends Component {
     if (this.state.isCreating) {
       return (
         <Fragment>
-          <FormSet
-            block={this.state.block}
-            subject={this.state.subject}
+          <FormEpisode
+            condition={this.state.condition}
             backToList={this.backToList}
           />
         </Fragment>
@@ -109,11 +105,11 @@ export class ListSets extends Component {
     if (this.state.isViewing) {
       return (
         <Fragment>
-          <DetailsSet
-            selectedSetId={this.state.selectedSetId}
-            set={this.state.selectedSet}
-            block={this.state.block}
-            subject={this.state.subject}
+          <DetailsEpisode
+            selectedEpisodeId={this.state.selectedEpisodeId}
+            episode={this.state.selectedEpisode}
+            condition={this.state.condition}
+
             backToList={this.backToList}
           />
         </Fragment>
@@ -135,71 +131,82 @@ export class ListSets extends Component {
       return (
         <div className="container">
           <h1 className="text-center py-2 text-info">
-            {this.state.block} {this.state.subject} Sets
+            {this.state.condition} Episodes
           </h1>
           {/* <hr /> */}
-          <a className="btn btn-secondary" href={`#/${this.state.blockLink}`}>
+          <a className="btn btn-secondary mt-1" href={`#/`}>
             Previous Page
           </a>
 
-          {user
-            ? this.props.auth.user.profile.role &&
-              this.props.auth.user.profile.role == "Instructor" && (
+
                 <Button
-                  className="btn btn-info ml-1"
+                  className="btn btn-info ml-1 mt-1"
                   onClick={(e) => {
                     this.setState({
                       isCreating: true,
                     });
                   }}
                 >
-                  Add a New Set
+                  Add a New Episode
                 </Button>
-              )
-            : ""}
+             
 
-          <a className="btn btn-outline-info float-right" href={`#/${this.state.blockLink}`}        
-             onClick={(e) => {
-            this.props.goCluster();
-            event.preventDefault();
-          }}
-          style={{ fontWeight: "bold" }}
-          >
-            <i className="fas fa-sitemap" style={{ fontSize: "1.3rem" }}></i> Clusters
-          </a>
+
+          
           <p></p>
-          <table className="table table-striped">
+          <table className="table table-striped mx-2">
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Owner</th>
+                <th>User</th>
+                
+                <th>Awareness</th>
+                <th>Duration</th>
+                <th>Type</th>
+                <th>Date</th>
+
                 <th />
               </tr>
             </thead>
             <tbody>
-              {this.props.sets.map((set) => (
-                <tr key={set.id}>
-                  <td>{set.id}</td>
-                  <td>{set.title}</td>
-                  <td>{set.owner_username}</td>
+              {this.props.episodes.map((episode) => (
+                <Fragment>
+                            {user
+            ? this.props.auth.user.profile.role &&
+              (this.props.auth.user.profile.role == "Physician" || this.props.auth.user.username == episode.owner_username)  && (
+
+
+                <tr key={episode.id}>
+                  
+                  <td>{episode.id}</td>
+                  <td>{episode.owner_username}</td>
+                  <td>{episode.awareness}</td>
+                  <td>{episode.duration}</td>
+                  <td>{episode.type}</td>
+                  <td>{episode.datee}</td>
                   <td>
                     <a
-                      href={`#/${this.state.blockLink}/${this.state.subjectLink}/sets/${set.id}`}
+                      href={`#/${this.state.conditionLink}/episodes/${episode.id}`}
                       className="btn btn-warning"
                       style={{ whiteSpace: "nowrap" }}
                       onClick={(e) => {
                         this.setState({
-                          selectedSetId: set.id,
+                          selectedEpisodeId: episode.id,
                           // isViewing: true,
-                          selectedSet: set,
+                          selectedEpisode: episode,
                         });
                       }}
                     >
-                      View Set
+                      Details
                     </a>
                   </td>
                 </tr>
+                  
+                  
+                  )
+                  : ""}
+                  </Fragment>   
+
               ))}
             </tbody>
           </table>
@@ -225,9 +232,9 @@ export class ListSets extends Component {
 
 const mapStateToProps = (state) => ({
   // the first one is whatever we're getting so it's okay, the 2nd one is the name of the reducer, the 3rd the state in the reducer
-  sets: state.sets.sets,
+  episodes: state.episodes.episodes,
   auth: state.auth,
   loadingState: state.loadingState,
 });
 
-export default connect(mapStateToProps, { getSets, deleteSet })(ListSets);
+export default connect(mapStateToProps, { getEpisodes, deleteEpisode })(ListEpisodes);
