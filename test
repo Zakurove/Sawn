@@ -1,0 +1,14 @@
+server {
+listen 80;
+servername= 128.199.124.127;
+
+location = /favicon.ico {access_log off; log_not_found off; }
+location /static/ {
+root/home/zakurove/History;
+}
+
+location / {
+	include proxy params;
+	proxy_pass https://unix:/home/zakurove/History/Sawn.sock
+	}
+}
